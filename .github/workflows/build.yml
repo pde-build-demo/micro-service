@@ -1,0 +1,29 @@
+# GitHub Action that is triggered on every push to the branch except for the main.
+
+name: 🏗️ Build Python Microservice
+on: 
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: 'pde-build-demo/micro-service'
+    - name: 🐍 Set up Python 
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: 📦 Install dependencies
+      run: |
+        ls -la
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: 🔬 Run tests
+      run: |
+        python -m unittest discover tests
