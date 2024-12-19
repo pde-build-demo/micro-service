@@ -15,6 +15,9 @@ jobs:
     - uses: actions/checkout@v4
       with:
         repository: 'pde-build-demo/micro-service'
+    - run: pwd
+    - run: ls -lart
+    - run: git remote -v
     - name: 🐍 Set up Python 
       uses: actions/setup-python@v5
       with:
